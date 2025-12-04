@@ -25,6 +25,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install dependencies
 make install
+
+# Set up pre-commit hooks (optional but recommended)
+make pre-commit-install
 ```
 
 ## Quick Start
@@ -51,4 +54,5 @@ make lint                     # Lint code (with auto-fix)
 make test                     # Run tests
 make test-cov                 # Tests with coverage
 make check                    # Format + lint + test
+make pre-commit-run           # Run pre-commit on all files
 ```
