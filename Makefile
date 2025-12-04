@@ -1,4 +1,4 @@
-.PHONY: help install test test-cov lint format check clean run
+.PHONY: help install test test-cov lint format check clean run pre-commit-install pre-commit-run
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -10,6 +10,13 @@ help: ## Show this help message
 
 install: ## Install dependencies
 	uv sync
+
+pre-commit-install: ## Install pre-commit hooks
+	uv run pre-commit install
+	uv run pre-commit install --hook-type pre-push
+
+pre-commit-run: ## Run pre-commit on all files
+	uv run pre-commit run --all-files
 
 test: ## Run all tests
 	uv run pytest -v
