@@ -38,8 +38,12 @@ def run_solution(year: int, day: int, *, quiet: bool = False) -> None:
             print(f"Day {day} - {year}")
             print(f"{'=' * 60}")
         module = import_module(module_path)
-        if hasattr(module, "main"):
-            module.main()
+        if hasattr(module, "solve"):
+            # Get the input file path from the module
+            input_file = Path(module.__file__).parent / "input.txt"
+            part1, part2 = module.solve(input_file)
+            print(f"Part 1: {part1}")
+            print(f"Part 2: {part2}")
     except ModuleNotFoundError as e:
         msg = f"Solution not found: {module_path}\nError: {e}"
         raise SystemExit(msg) from e

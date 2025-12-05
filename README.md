@@ -1,6 +1,6 @@
 # Advent of Code Solutions
 
-Solutions for [Advent of Code](https://adventofcode.com) using Python 3.14.
+Solutions for [Advent of Code](https://adventofcode.com) using Python 3.13.
 
 ## Structure
 

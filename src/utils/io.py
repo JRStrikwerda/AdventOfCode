@@ -1,12 +1,7 @@
 """Simple, efficient I/O utilities for Advent of Code."""
 
-from __future__ import annotations
-
+from collections.abc import Callable
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from collections.abc import Callable
 
 
 def read_input(filepath: str | Path, *, strip: bool = True) -> str:

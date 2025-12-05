@@ -3,7 +3,7 @@ name = "adventofcode"
 version = "0.2.0"
 description = "Advent of Code solutions"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = []
 authors = [{name = "JRStrikwerda"}]
 
@@ -12,7 +12,7 @@ package = true
 
 [tool.ruff]
 line-length = 100
-target-version = "py314"
+target-version = "py313"
 src = ["src"]
 
 [tool.ruff.lint]
@@ -74,6 +74,32 @@ exclude_lines = [
     "if __name__ == .__main__.:",
     "if TYPE_CHECKING:",
     "@abstractmethod",
+]
+
+[tool.pylint.main]
+init-hook = "import sys; sys.path.append('src')"
+
+[tool.pylint.messages_control]
+max-line-length = 100
+disable = [
+    "too-many-positional-arguments",
+    "too-many-arguments",
+    "redefined-outer-name",
+    "too-many-function-args",
+    "duplicate-code", # pylint is too sensitive and got it wrong more often than not
+    "logging-fstring-interpolation", # Let's keep fstrings for consistency
+    "method-cache-max-size-none", # I want to be able to use @cache
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "no-else-continue", # if ... continue else something should be accepted
+    "no-else-raise", # if ... raise else something should be accepted
+    "no-else-return", # if ... return else return should be accepted.
+    "too-many-instance-attributes",  # Not relevant for dataclasses.
+    "unsubscriptable-object", # https://github.com/PyCQA/pylint/issues/3637
+    "too-few-public-methods", # Some classes can have no methods,
+    "too-many-locals", # just annoying
+    "wrong-import-order",  # ruff takes care of this
+    "W0511",  # i do want fixme comments
 ]
 
 [dependency-groups]
