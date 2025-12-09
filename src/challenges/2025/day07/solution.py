@@ -21,13 +21,14 @@ def solve(filepath: Path) -> tuple[int, int]:
 
     @cache
     def count_paths(row: int, col: int) -> int:
-        """Recursively count possible tachyon positions."""
+        """Recursively count possible tachyon paths."""
         # Stop recursion if out of bounds (reached bottom or side)
         if row >= height or col >= width or col < 0:
             return 1
 
-        # Split found, check both left and right columns
+        # Split found, check both left and right paths/columns
         if (row, col) in splitters:
+            # Increment split count
             splits.add(Coordinate((row, col)))
             return count_paths(row, col - 1) + count_paths(row, col + 1)
 
