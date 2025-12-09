@@ -20,7 +20,7 @@ def read_lines(
 ) -> list[str]:
     """Read input file as list of lines."""
     path = Path(filepath)
-    lines = path.read_text(encoding="utf-8").splitlines()
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
 
     if strip:
         lines = [line.strip() for line in lines]

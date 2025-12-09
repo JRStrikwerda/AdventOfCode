@@ -1,11 +1,28 @@
 """Tests for Day 4: Printing Department"""
 
+import pytest
+
+from utils import read_lines
+
 from .solution import (
     count_neighbours,
     get_accessible_rolls,
     iteratively_get_accessible_rolls,
     parse_rolls,
+    solve,
 )
+
+
+@pytest.fixture
+def example_grid(example_file):
+    """Grid from example.txt."""
+    return read_lines(example_file)
+
+
+@pytest.fixture
+def example_rolls(example_grid):
+    """Parsed rolls from example grid."""
+    return parse_rolls(example_grid)
 
 
 class TestNeighborCount:
@@ -20,8 +37,8 @@ class TestNeighborCount:
             "....",
         ]
         rolls = parse_rolls(grid)
-        assert count_neighbours(rolls, 0, 0) == 1
-        assert count_neighbours(rolls, 0, 1) == 1
+        assert count_neighbours(rolls, (0, 0)) == 1
+        assert count_neighbours(rolls, (0, 1)) == 1
 
     def test_middle_roll_no_neighbors(self) -> None:
         """Test a roll with no neighbors."""
@@ -31,7 +48,7 @@ class TestNeighborCount:
             "...",
         ]
         rolls = parse_rolls(grid)
-        assert count_neighbours(rolls, 1, 1) == 0
+        assert count_neighbours(rolls, (1, 1)) == 0
 
     def test_middle_roll_all_neighbors(self) -> None:
         """Test a roll surrounded by 8 neighbors."""
@@ -41,7 +58,7 @@ class TestNeighborCount:
             "@@@",
         ]
         rolls = parse_rolls(grid)
-        assert count_neighbours(rolls, 1, 1) == 8
+        assert count_neighbours(rolls, (1, 1)) == 8
 
     def test_edge_roll(self) -> None:
         """Test a roll on the edge."""
@@ -51,9 +68,9 @@ class TestNeighborCount:
             "...",
         ]
         rolls = parse_rolls(grid)
-        assert count_neighbours(rolls, 1, 0) == 1  # left edge
-        assert count_neighbours(rolls, 1, 1) == 2  # middle
-        assert count_neighbours(rolls, 1, 2) == 1  # right edge
+        assert count_neighbours(rolls, (1, 0)) == 1  # left edge
+        assert count_neighbours(rolls, (1, 1)) == 2  # middle
+        assert count_neighbours(rolls, (1, 2)) == 1  # right edge
 
 
 class TestAccessibleRolls:
@@ -219,3 +236,21 @@ class TestSolverPart2:
         ]
         rolls = parse_rolls(grid)
         assert iteratively_get_accessible_rolls(rolls) == 43
+
+
+class TestMain:
+    """Test main entry point and solve function."""
+
+    def test_solve_with_example(self, example_file):
+        """Test solve function with example.txt."""
+        part1, part2 = solve(example_file)
+        assert part1 == 13
+        assert part2 == 43
+
+    def test_example_part1(self, example_rolls):
+        """Test Part 1 with example data."""
+        assert len(get_accessible_rolls(example_rolls)) == 13
+
+    def test_example_part2(self, example_rolls):
+        """Test Part 2 with example data."""
+        assert iteratively_get_accessible_rolls(example_rolls.copy()) == 43
