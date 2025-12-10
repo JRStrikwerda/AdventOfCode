@@ -1,4 +1,4 @@
-.PHONY: help install test test-cov lint format check clean run pre-commit-install pre-commit-run
+.PHONY: help install test test-cov lint format check clean run scaffold pre-commit-install pre-commit-run
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -39,5 +39,13 @@ clean: ## Remove cache and build artifacts
 
 run: ## Run with arguments (e.g., make run ARGS="--latest")
 	uv run python run.py $(ARGS)
+
+scaffold: ## Create new solution structure (e.g., make scaffold YEAR=2025 DAY=8)
+	@if [ -z "$(YEAR)" ] || [ -z "$(DAY)" ]; then \
+		echo "Error: YEAR and DAY are required"; \
+		echo "Usage: make scaffold YEAR=2025 DAY=8"; \
+		exit 1; \
+	fi
+	uv run python scripts/scaffold.py $(YEAR) $(DAY)
 
 .DEFAULT_GOAL := help

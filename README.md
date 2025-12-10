@@ -14,7 +14,10 @@ src/
         ├── day01/         # Day 1: Safe Dial
         ├── day02/         # Day 2: Gift Shop
         ├── day03/         # Day 3: Lobby
-        └── day04/         # Day 4: Printing Department
+        ├── day04/         # Day 4: Printing Department
+        ├── day05/         # Day 5: Cafeteria Inventory Management System
+        ├── day06/         # Day 6: Trash Compactor
+        └── day07/         # Day 7: Teleporter Lab
 ```
 
 ## Setup
@@ -35,6 +38,9 @@ make pre-commit-install
 ```bash
 # Show all commands
 make help
+
+# Create new solution structure
+make scaffold YEAR=2025 DAY=8  # Creates day08/ with templates
 
 # Run solutions
 make run                      # Runs all solutions
