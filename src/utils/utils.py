@@ -13,6 +13,12 @@ def map_range(range_str: str) -> tuple[int, int]:
     return int(start_str), int(stop_str)
 
 
+def map_coordinate(coord_str: str) -> Coordinate:
+    """Map a coordinate specification string 'x,y' to a Coordinate tuple (x, y)."""
+    x_str, y_str = coord_str.strip().split(",")
+    return int(x_str), int(y_str)
+
+
 def iterate_over_grid[T](
     grid: Grid, condition: Callable[[T], bool] | None = None
 ) -> Iterable[Coordinate]:

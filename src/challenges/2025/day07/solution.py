@@ -26,7 +26,7 @@ def solve(filepath: Path) -> tuple[int, int]:
         if row >= height or col >= width or col < 0:
             return 1
 
-        # Split found, check both left and right paths/columns
+        # Split found, check both left and right paths
         if (row, col) in splitters:
             # Increment split count
             splits.add(Coordinate((row, col)))
